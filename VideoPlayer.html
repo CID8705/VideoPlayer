@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="jp">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript", src="JavaScript.js"></script>
+	<style>
+		body {
+			color: #FFFFFF;
+			background-color: #2B2B2B;
+			line-height: 250%;
+			text-align: center;
+		}
+		ul {
+			list-style-type: none;
+		}
+		video {
+			background-color: #000000;
+			border: 10px solid #FFFFFF;
+			border-radius: 20px;
+			width: 640px"
+		}
+	</style>
+	<title>VideoPlayer</title>
+</head>
+<body>
+	<h1>VideoPlayer</h1>
+	<ul>
+		<li>
+			<form name="Form" action="javascript:getUrl()">
+				<input type="text" name="textbox" size="128">
+			</form>
+			<a id="link" href="" target="_blank">URL</a>
+		</li>
+		<li>
+			<video id="video" controls preload="auto" width="640" height="360" onClick="videoPlay()">
+				<source src="">
+				<p>動画を再生するには，videoタグをサポートしたブラウザが必要です。</p>
+			</video>
+		</li>
+	</ul>
+</body>
+</html>
