@@ -25,17 +25,22 @@ function getSource(url) {
 	return;
 }
 function getUrl() {
-	var str = "";
+	var str = Form.textbox.value.replace(/\s+/g, "");
 	var url1, url2;
 	var i;
 	var link;
 	var video;
-	getSource(Form.textbox.value);
-	url1 = source.replace(/\"/g, " ").match(/http:\/\/www\.anitube\.se\/player\/config\.php\?key=\S+/g);
-	for (i = 0; i < url1.length; ++i) {
-		getSource(url1[i]);
-		url2 = source.replace(/\"/g, " ").match(/http:\/\/vid\S+/g);
-		str = url2[url2.length - 1];
+	if (str.substr(-4) == ".mp4") {
+		str = Form.textbox.value;
+	}
+	else {
+		getSource(Form.textbox.value);
+		url1 = source.replace(/\"/g, " ").match(/http:\/\/www\.anitube\.se\/player\/config\.php\?key=\S+/g);
+		for (i = 0; i < url1.length; ++i) {
+			getSource(url1[i]);
+			url2 = source.replace(/\"/g, " ").match(/http:\/\/vid\S+/g);
+			str = url2[url2.length - 1];
+		}
 	}
 	link = document.getElementById('link');
 	link.href = str;
