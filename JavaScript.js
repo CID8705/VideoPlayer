@@ -1,4 +1,4 @@
-﻿var source="";
+var source="";
 function getSource(url) {
     var request = null;
     if ("XMLHttpRequest" in window) {
