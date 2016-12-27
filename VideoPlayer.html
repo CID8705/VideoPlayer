@@ -2,7 +2,63 @@
 <html lang="jp">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<script type="text/javascript", src="Video.js"></script>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://rawgit.com/padolsey-archive/jquery.fn/master/cross-domain-ajax/jquery.xdomainajax.js"></script>
+	<script type="text/javascript">
+		function getUrl() {
+			var str = Form.textbox.value.replace(/\s+/g, "");
+			var url1, url2;
+			var i;
+			var link;
+			var video;
+			if (str.substr(-4) == ".mp4") {
+				str = Form.textbox.value;
+				link = document.getElementById('link');
+				link.href = str;
+				link.innerText = str;
+				video = document.getElementById('video');
+				video.src = str;
+				video.load();
+			}
+			else {
+				$.ajax({
+					url: Form.textbox.value,
+					type: 'GET',
+					success: function(data) {
+						alert(data.responseText);
+						url1 = data.responseText.replace(/\"/g, " ").match(/http:\/\/www\.anitube\.se\/player\/config\.php\?key=\S+/g);
+						$.ajax({
+							url: url1[0],
+							type: 'GET',
+							dataType: 'html',
+							success: function(data) {
+								url2 = data.responseText.replace(/\"/g, " ").match(/http:\/\/vid\S+/g);
+								str = url2[url2.length - 1];
+								link = document.getElementById('link');
+								link.href = str;
+								link.innerText = str;
+								video = document.getElementById('video');
+								video.src = str;
+								video.load();
+							}
+						});
+					}
+				});
+			}
+		    return;
+		}
+		function videoPlay() {
+			var video;
+			video = document.getElementById('video');
+			if (video.paused == true) {
+				video.play();
+			}
+			else {
+				video.pause();
+			}
+			return;
+		}
+	</script>
 	<style>
 		body {
 			color: #FFFFFF;
